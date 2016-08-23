@@ -25,6 +25,7 @@ public class GamePanel extends JPanel {
    }
 
     public void paintComponent(Graphics g) {
+		draw(g);
     }
 
     protected void draw(Graphics g) {
@@ -36,7 +37,7 @@ public class GamePanel extends JPanel {
             bgimage = imageicon.getImage();
 
             /*Draw image on the panel*/
-            super.paintComponent(g);
+            //super.paintComponent(g);
 
             if(bgimage != null) {
                 g.drawImage(bgimage, 0, 0, getWidth(), getHeight(), this);

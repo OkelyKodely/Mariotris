@@ -20,7 +20,7 @@ public class Mariotris implements KeyListener {
     private Graphics g;
     private Piece pieces[] = new Piece[100000];
     private int currentPieceNumber = 0;
-    private int squares[][] = new int[810][460];
+    private int squares[][] = new int[710][460];
     private JLabel thescore = null;
     private int score = 0;
     private JLabel theline = null;
@@ -37,11 +37,11 @@ public class Mariotris implements KeyListener {
     }
 
     public Mariotris() {
-
+	
+	  gameFrame.setLayout(null);
+        
         JPanel titlePanel = new JPanel();
-        titlePanel.setSize(50, 850);
-        titlePanel.setLocation(0, 0);
-        titlePanel.setBackground(Color.LIGHT_GRAY);
+	   //titlePanel.setBackground(Color.LIGHT_GRAY);
         ImageIcon imageIcon = new ImageIcon(getClass().getResource("/mario-running.gif"));
         JLabel ru = new JLabel(imageIcon);
         titlePanel.add(ru);
@@ -58,22 +58,24 @@ public class Mariotris implements KeyListener {
         this.thelevel = new JLabel("1");
         titlePanel.add(this.thelevel);
 
-        gameFrame.add(titlePanel);
-        gameFrame.setLayout(null);
-        gameFrame.setSize(560, 850);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int width = (int) screenSize.getWidth();
-        gameFrame.setLocation(width/2-305, 10);
+        titlePanel.setSize(60, (int) screenSize.getHeight()-17);
+        titlePanel.setLocation(width/2 - 310, (0));
+	   //gamePanel.setLayout(null);
+        gamePanel.setSize(500, (int) screenSize.getHeight()-17);
+        gamePanel.setLocation(width/2 - 310 + (60), (0));
+        gameFrame.setSize(width, (int) screenSize.getHeight());
+	   gameFrame.setLocation(0, 0);
+	   //gameFrame.setBackground(Color.BLACK);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gamePanel.setBackground(Color.WHITE);
-        gameFrame.setResizable(false);
-        gamePanel.setSize(560, 850);
-        gamePanel.setLocation(60, 0);
+        //gameFrame.setResizable(false);
+	   //gameFrame.setUndecorated(true);
+        gameFrame.add(titlePanel);
         gameFrame.add(gamePanel);
-        gameFrame.setVisible(true);
+	   gameFrame.show();
 
         gameFrame.addKeyListener(this);
-
     }
 
     public void setLevel(int theLevel) {
@@ -546,7 +548,7 @@ public class Mariotris implements KeyListener {
             int clearLineNeeded = 0;
             ArrayList clearRows = new ArrayList();
 
-            for(int i=0; i<810; i+=50) {
+            for(int i=0; i<710; i+=50) {
 
                 clearLineNeeded = 0;
 
@@ -637,7 +639,7 @@ public class Mariotris implements KeyListener {
 
                     }
 
-                    for(int ii=0; ii<810; ii++) {
+                    for(int ii=0; ii<710; ii++) {
 
                         for(int jj=0; jj<460; jj++) {
 
@@ -722,7 +724,7 @@ public class Mariotris implements KeyListener {
         gamePanel.currentPieceNumber = this.currentPieceNumber;
         gamePanel.drawSquares();
 
-        for(int i=0; i<810; i++) {
+        for(int i=0; i<710; i++) {
 
             for(int j=0; j<460; j++) {
 
@@ -746,7 +748,6 @@ public class Mariotris implements KeyListener {
             try {
                 Thread.sleep(TIMER_DELAY);
             } catch(Exception e) {
-
             }
             gameLoop();
             if(this.line > 0 && this.line % 4 == 0) {
@@ -765,7 +766,7 @@ public class Mariotris implements KeyListener {
         int y3 = gamePanel.pieces[this.currentPieceNumber].block[3].y;
 
         if(y0 >= y1 && y0 >= y2 && y0 >= y3) {
-            if(y0 >= 800) {
+            if(y0 >= 700) {
                 return true;
             }
             else {
@@ -773,7 +774,7 @@ public class Mariotris implements KeyListener {
             }
         }
         else if(y1 >= y0 && y1 >= y2 && y1 >= y3) {
-            if(y1 >= 800) {
+            if(y1 >= 700) {
                 return true;
             }
             else {
@@ -781,7 +782,7 @@ public class Mariotris implements KeyListener {
             }
         }
         else if(y2 >= y1 && y2 >= y0 && y2 >= y3) {
-            if(y2 >= 800) {
+            if(y2 >= 700) {
                 return true;
             }
             else {
@@ -789,7 +790,7 @@ public class Mariotris implements KeyListener {
             }
         }
         else if(y3 >= y1 && y3 >= y2 && y3 >= y0) {
-            if(y3 >= 800) {
+            if(y3 >= 750) {
                 return true;
             }
             else {
@@ -826,8 +827,9 @@ public class Mariotris implements KeyListener {
     public void gameLoop() {
 
       try {
-        
+
         if(this.currentPieceNumber > 0) {
+
             if(overlapPieces()) {
 
                 this.setLevel(1);
@@ -840,7 +842,7 @@ public class Mariotris implements KeyListener {
 
                 this.currentPieceNumber = 0;
 
-                for(int i=0; i<810; i++) {
+                for(int i=0; i<710; i++) {
 
                     for(int j=0; j<460; j++) {
 
@@ -904,17 +906,17 @@ public class Mariotris implements KeyListener {
 
             if(stackedOnTopOfPiece()) {
 
-                if(gamePanel.pieces[this.currentPieceNumber].block[0].y > 800) {
-                    gamePanel.pieces[this.currentPieceNumber].block[0].y = 800;
+                if(gamePanel.pieces[this.currentPieceNumber].block[0].y > 700) {
+                    gamePanel.pieces[this.currentPieceNumber].block[0].y = 700;
                 }
-                if(gamePanel.pieces[this.currentPieceNumber].block[1].y > 800) {
-                    gamePanel.pieces[this.currentPieceNumber].block[1].y = 800;
+                if(gamePanel.pieces[this.currentPieceNumber].block[1].y > 700) {
+                    gamePanel.pieces[this.currentPieceNumber].block[1].y = 700;
                 }
-                if(gamePanel.pieces[this.currentPieceNumber].block[2].y > 800) {
-                    gamePanel.pieces[this.currentPieceNumber].block[2].y = 800;
+                if(gamePanel.pieces[this.currentPieceNumber].block[2].y > 700) {
+                    gamePanel.pieces[this.currentPieceNumber].block[2].y = 700;
                 }
-                if(gamePanel.pieces[this.currentPieceNumber].block[3].y > 800) {
-                    gamePanel.pieces[this.currentPieceNumber].block[3].y = 800;
+                if(gamePanel.pieces[this.currentPieceNumber].block[3].y > 700) {
+                    gamePanel.pieces[this.currentPieceNumber].block[3].y = 700;
                 }
                 squares[gamePanel.pieces[this.currentPieceNumber].block[0].y][gamePanel.pieces[this.currentPieceNumber].block[0].x] = 1;
                 squares[gamePanel.pieces[this.currentPieceNumber].block[1].y][gamePanel.pieces[this.currentPieceNumber].block[1].x] = 1;
@@ -923,10 +925,10 @@ public class Mariotris implements KeyListener {
 
             } else if(stackedOnBottom()) {
 
-                squares[800][gamePanel.pieces[this.currentPieceNumber].block[0].x] = 1;
-                squares[800][gamePanel.pieces[this.currentPieceNumber].block[1].x] = 1;
-                squares[800][gamePanel.pieces[this.currentPieceNumber].block[2].x] = 1;
-                squares[800][gamePanel.pieces[this.currentPieceNumber].block[3].x] = 1;
+                squares[700][gamePanel.pieces[this.currentPieceNumber].block[0].x] = 1;
+                squares[700][gamePanel.pieces[this.currentPieceNumber].block[1].x] = 1;
+                squares[700][gamePanel.pieces[this.currentPieceNumber].block[2].x] = 1;
+                squares[700][gamePanel.pieces[this.currentPieceNumber].block[3].x] = 1;
 
             }
 
