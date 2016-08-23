@@ -60,10 +60,10 @@ public class Mariotris implements KeyListener {
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int width = (int) screenSize.getWidth();
-        titlePanel.setSize(60, (int) screenSize.getHeight()-17);
+        titlePanel.setSize(60, 500-15);
         titlePanel.setLocation(width/2 - 310, (0));
 	   //gamePanel.setLayout(null);
-        gamePanel.setSize(500, (int) screenSize.getHeight()-17);
+        gamePanel.setSize(500, (int) 767-17);
         gamePanel.setLocation(width/2 - 310 + (60), (0));
         gameFrame.setSize(width, (int) screenSize.getHeight());
 	   gameFrame.setLocation(0, 0);
